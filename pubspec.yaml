@@ -43,6 +43,7 @@ dependencies:
   shared_preferences:
   provider:
   local_auth:
+  flutter_inappwebview:
 
 dev_dependencies:
   flutter_test:
