@@ -12,18 +12,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-
-        primarySwatch: Colors.blue,
-      ),
-     routes: {
-      "government_screen": (context) => GovernmentScreen(),
-     }
-     
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        initialRoute: "government_screen",
+        routes: {
+          "government_screen": (context) => GovernmentScreen(),
+        });
   }
 }
-
-

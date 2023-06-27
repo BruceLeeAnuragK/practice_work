@@ -12,15 +12,15 @@ class _StreamBuilderScreenState extends State<StreamBuilderScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Stream Builder",style: TextStyle(
-          fontSize: 20,
-
-        ),),
+        title: Text(
+          "Stream Builder",
+          style: TextStyle(
+            fontSize: 20,
+          ),
+        ),
       ),
       body: Column(
-        children: [
-
-        ],
+        children: [],
       ),
     );
   }
