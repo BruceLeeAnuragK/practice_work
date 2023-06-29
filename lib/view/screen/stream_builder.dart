@@ -12,60 +12,74 @@ class StreamBuilderScreen extends StatefulWidget {
 }
 
 class _StreamBuilderScreenState extends State<StreamBuilderScreen> {
-
-Connectivity connectivity = Connectivity();
+  Connectivity connectivity = Connectivity();
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<StreamController>(
-      builder: (context, provider, child) => Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Stream Builder",
-            style: TextStyle(
-              fontSize: 20,
+    return WillPopScope(
+      onWillPop: () async {
+        bool willPOP = await Provider.of<StreamProvider>(context, listen: false)
+            .controller!
+            .canGoBack();
+        return !willPOP;
+        return false;
+      },
+      child: Consumer<StreamController>(
+        builder: (context, provider, child) => Scaffold(
+          appBar: AppBar(
+            title: Text(
+              "Stream Builder",
+              style: TextStyle(
+                fontSize: 20,
+              ),
             ),
           ),
+          body: StreamBuilder(
+              stream: connectivity.onConnectivityChanged,
+              builder: (context, snapShot) {
+                if (snapShot.hasData) {
+                  ConnectivityResult res = snapShot.data!;
+                  switch (res) {
+                    case ConnectivityResult.mobile:
+                      return Center(
+                        child: Builder(
+                          builder: (context) {
+                            return InAppWebView(
+                                onLoadStart: (controller, url) {
+                                  provider.check();
+                                },
+                                onLoadStop: (controller, url) {
+                                  provider.check();
+                                },
+                                initialUrlRequest: URLRequest(
+                                    url: Uri.parse(provider.initUrl)),
+                                onWebViewCreated: (controller) async {
+                                  provider.initialize(controller: controller);
+                                });
+                          },
+                        ),
+                      );
+                    case ConnectivityResult.wifi:
+                      return Center(
+                        child: Text("WIFI CONNECION !!"),
+                      );
+                    case ConnectivityResult.none:
+                      return Center(
+                        child: Text("NO Connection !!"),
+                      );
+                    default:
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                  }
+                } else if (snapShot.hasError) {
+                  return Center(
+                    child: Text(snapShot.error.toString()),
+                  );
+                }
+                return Column();
+              }),
         ),
-        body: StreamBuilder(
-          stream: connectivity.onConnectivityChanged,
-          builder: (context, snapShot) {
-            if (snapShot.hasData) {
-              ConnectivityResult res = snapShot.data!;
-              switch (res) {
-                case ConnectivityResult.mobile:
-                  return Center(
-                    child: Builder(
-                      builder: (context) {
-                        return InAppWebView(
-                          initialUrlRequest: URLRequest(url:Uri.parse(provider.initUrl)),
-                            onWebViewCreated: (controller,url) async {
-
-                            }
-                        );
-                      },
-                    ),
-                  );
-                case ConnectivityResult.wifi:
-                  return Center(
-                    child: Text("WIFI CONNECION !!"),
-                  );
-                case ConnectivityResult.none:
-                  return Center(child: Text("NO Connection !!"),);
-                default:
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-              }
-          }
-            else if (snapShot.hasError){
-              return Center(
-                child: Text(snapShot.error.toString()),
-              );
-            }
-            return Column();
-          }
-          ),
       ),
     );
   }
