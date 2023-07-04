@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 class StreamController extends ChangeNotifier {
   InAppWebViewController? controller;
-  String initUrl = "";
+  String initUrl = "https://services.india.gov.in/service/listing?cat_id=4&ln=en";
   bool callBack = false;
   bool callForward = false;
   PullToRefreshController? refreshController;
@@ -21,8 +21,15 @@ class StreamController extends ChangeNotifier {
     notifyListeners();
   }
 
+
   back() {
     controller!.goBack();
+    notifyListeners();
+  }
+
+  endRefresh()
+  {
+    refreshController!.endRefreshing();
     notifyListeners();
   }
 

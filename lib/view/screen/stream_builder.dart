@@ -18,7 +18,7 @@ class _StreamBuilderScreenState extends State<StreamBuilderScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        bool willPOP = await Provider.of<StreamProvider>(context, listen: false)
+        bool willPOP = await Provider.of<StreamController>(context, listen: false)
             .controller!
             .canGoBack();
         return !willPOP;
@@ -45,11 +45,22 @@ class _StreamBuilderScreenState extends State<StreamBuilderScreen> {
                         child: Builder(
                           builder: (context) {
                             return InAppWebView(
+                              pullToRefreshController: provider.refreshController,
                                 onLoadStart: (controller, url) {
+                                  provider.endRefresh();
                                   provider.check();
                                 },
                                 onLoadStop: (controller, url) {
+                                  provider.endRefresh();
                                   provider.check();
+                                },
+                                onProgressChanged: (controller, progress)
+                                {
+
+                                     if(progress == 100)
+                                       {
+                                         provider.endRefresh();
+                                       }
                                 },
                                 initialUrlRequest: URLRequest(
                                     url: Uri.parse(provider.initUrl)),

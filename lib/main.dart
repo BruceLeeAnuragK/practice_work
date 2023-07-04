@@ -1,11 +1,15 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
+import 'package:practice_work/Provider/AudioProvider.dart';
 import 'package:practice_work/Provider/streamProvider.dart';
 import 'package:practice_work/view/screen/government_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (context) => StreamController(),)
+    ChangeNotifierProvider(create: (context) => StreamController(),),
+    ChangeNotifierProvider(create: (context) => AudioProvider())
   ], child:  MyApp(),) );
 }
 
