@@ -3,42 +3,45 @@ import 'package:flutter/material.dart';
 
 import '../Model/my_song.dart';
 
-class AudioProvider extends ChangeNotifier{
+class AudioProvider extends ChangeNotifier {
   AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
   Duration totalDuration = Duration.zero;
 
-  AudioProvider()
-  {
-    assetsAudioPlayer.open(Audio(audioPath + MyAudios.firstSong),autoStart: false).then((value) {
+  AudioProvider() {
+    assetsAudioPlayer
+        .open(Audio("assets/audio/1.mp3"),
+            autoStart: false, showNotification: true)
+        .then((value) {
       totalDuration = assetsAudioPlayer.current.value!.audio.duration;
+      debugPrint("DONE>>>>>>>>>>>>>>>>>>>>>>>>>");
     });
-
   }
 
-  play() async
-  {
-     await assetsAudioPlayer.play();
-     notifyListeners();
+  play() async {
+    await assetsAudioPlayer.play();
+    notifyListeners();
   }
 
-  pause() async
-  {
+  pause() async {
     await assetsAudioPlayer.pause();
     notifyListeners();
   }
 
-  seek({required int seconds}) async
-  {
+  seek({required int seconds}) async {
     await assetsAudioPlayer.seek(Duration(seconds: seconds));
     notifyListeners();
   }
 
-  get isPlaying
-  {
+  skip({required int seconds}) async {
+    assetsAudioPlayer.seekBy(Duration(seconds: seconds));
+    notifyListeners();
+  }
+
+  get isPlaying {
     return assetsAudioPlayer.isPlaying.value;
   }
 
-  get currentPosition{
+  get currentPosition {
     return assetsAudioPlayer.currentPosition;
   }
 }

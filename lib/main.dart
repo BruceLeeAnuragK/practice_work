@@ -1,9 +1,10 @@
-import 'dart:js';
+
 
 import 'package:flutter/material.dart';
 import 'package:practice_work/Provider/AudioProvider.dart';
 import 'package:practice_work/Provider/streamProvider.dart';
 import 'package:practice_work/view/screen/government_screen.dart';
+import 'package:practice_work/view/screen/song_page.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: "government_screen",
         routes: {
-          "government_screen": (context) => GovernmentScreen(),
+          "government_screen": (context) => SongPage(),
+
         });
   }
 }
