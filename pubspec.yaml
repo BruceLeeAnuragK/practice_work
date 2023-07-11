@@ -45,6 +45,7 @@ dependencies:
   local_auth:
   flutter_inappwebview:
   assets_audio_player:
+  video_player:
 
 dev_dependencies:
   flutter_test:
