@@ -1,17 +1,22 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:practice_work/Provider/AudioProvider.dart';
+import 'package:practice_work/Provider/VideoProvider.dart';
 import 'package:practice_work/Provider/streamProvider.dart';
 import 'package:practice_work/view/screen/government_screen.dart';
 import 'package:practice_work/view/screen/song_page.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (context) => StreamController(),),
-    ChangeNotifierProvider(create: (context) => AudioProvider())
-  ], child:  MyApp(),) );
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (context) => StreamController(),
+      ),
+      ChangeNotifierProvider(create: (context) => AudioProvider()),
+      ChangeNotifierProvider(create: (context) => VideoControllers()),
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -29,7 +34,6 @@ class MyApp extends StatelessWidget {
         initialRoute: "government_screen",
         routes: {
           "government_screen": (context) => SongPage(),
-
         });
   }
 }

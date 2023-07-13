@@ -46,6 +46,7 @@ dependencies:
   flutter_inappwebview:
   assets_audio_player:
   video_player:
+  chewie:
 
 dev_dependencies:
   flutter_test:

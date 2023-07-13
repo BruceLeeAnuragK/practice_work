@@ -6,15 +6,27 @@ import '../Model/my_song.dart';
 class AudioProvider extends ChangeNotifier {
   AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
   Duration totalDuration = Duration.zero;
-
+  List Audios = [
+    "assets/audio/1.mp3",
+    "assets/audio/2.mp3",
+    "assets/audio/3.mp3",
+    "assets/audio/4.mp3",
+  ];
   AudioProvider() {
+    init(index: 0);
+  }
+  init({required int index}) {
     assetsAudioPlayer
-        .open(Audio("assets/audio/1.mp3"),
-            autoStart: false, showNotification: true)
+        .open(Audio(Audios[index]), autoStart: false, showNotification: true)
         .then((value) {
       totalDuration = assetsAudioPlayer.current.value!.audio.duration;
       debugPrint("DONE>>>>>>>>>>>>>>>>>>>>>>>>>");
     });
+  }
+
+  changeIndex({required int index}) {
+    assetsAudioPlayer.pause();
+    init(index: index);
   }
 
   play() async {
