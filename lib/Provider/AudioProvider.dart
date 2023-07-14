@@ -20,7 +20,7 @@ class AudioProvider extends ChangeNotifier {
         .open(Audio(Audios[index]), autoStart: false, showNotification: true)
         .then((value) {
       totalDuration = assetsAudioPlayer.current.value!.audio.duration;
-      debugPrint("DONE>>>>>>>>>>>>>>>>>>>>>>>>>");
+      print("DONE>>>>>>>>>>>>>>>>>>>>>>>>>");
     });
   }
 

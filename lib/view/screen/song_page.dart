@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:practice_work/Provider/AudioProvider.dart';
 import 'package:practice_work/Provider/VideoProvider.dart';
+import 'package:practice_work/componets/song_page.dart';
 import 'package:provider/provider.dart';
 
 class SongPage extends StatefulWidget {
@@ -21,6 +22,7 @@ class _SongPageState extends State<SongPage> with TickerProviderStateMixin {
     super.initState();
     animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 400));
+    Provider.of<VideoControllers>(context, listen: false).init(index: 0);
   }
 
   @override
@@ -53,32 +55,7 @@ class _SongPageState extends State<SongPage> with TickerProviderStateMixin {
         ),
         body: TabBarView(
           children: [
-            Consumer<AudioProvider>(
-              builder: (context, provider, child) => StreamBuilder(
-                stream: provider.assetsAudioPlayer.currentPosition,
-                builder: (context, AsyncSnapshot<Duration> snapShot) {
-                  if (snapShot.hasData) {
-                    double currentPosition =
-                        snapShot.data!.inSeconds.toDouble();
-                    return SingleChildScrollView(
-                      child: ListView.separated(
-                          itemBuilder: (context, index) => ListTile(
-                                onTap: () {
-                                  provider.changeIndex(index: index);
-                                },
-                                title: Text("Audio ${index + 1}"),
-                              ),
-                          separatorBuilder: (context, index) => Divider(),
-                          itemCount: provider.Audios.length),
-                    );
-                  } else {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                },
-              ),
-            ),
+            MediaPage(),
             Consumer<VideoControllers>(
               builder: (context, pro, child) => Center(
                 child: pro.videoPlayerController.value.isInitialized
@@ -91,20 +68,18 @@ class _SongPageState extends State<SongPage> with TickerProviderStateMixin {
                               controller: pro.chewieController,
                             ),
                           ),
-                          SizedBox(
-                            child: ListView.separated(
-                                itemBuilder: (context, index) => ListTile(
-                                      onTap: () {
-                                        pro.changeIndex(index: index);
-                                      },
-                                      leading: CircleAvatar(
-                                        foregroundImage: pro.VideoImages[index],
-                                      ),
-                                      title: Text(
-                                          pro.VideosName[index].toString()),
-                                    ),
-                                separatorBuilder: (context, index) => Divider(),
-                                itemCount: pro.Videos.length),
+                          ListView.separated(
+                            itemBuilder: (context, index) => ListTile(
+                              onTap: () {
+                                pro.changeIndex(index: index);
+                              },
+                              leading: CircleAvatar(
+                                foregroundImage: pro.VideoImages[index],
+                              ),
+                              title: Text(pro.VideosName[index].toString()),
+                            ),
+                            separatorBuilder: (context, index) => Divider(),
+                            itemCount: pro.Videos.length,
                           ),
                         ],
                       )

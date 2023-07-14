@@ -55,7 +55,7 @@ class VideoControllers extends ChangeNotifier {
   }
   init({required int index}) {
     videoPlayerController = VideoPlayerController.asset(
-      "videos/Calm_Down.mp4",
+      "assets/videos/Aaj_Ke_Baad_Tu_Meri_Rehna.mp4",
     )..initialize().then((value) {
         chewieController = ChewieController(
           videoPlayerController: videoPlayerController,
