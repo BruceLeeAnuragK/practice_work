@@ -5,6 +5,7 @@ import 'package:practice_work/Provider/streamProvider.dart';
 import 'package:practice_work/view/screen/government_screen.dart';
 import 'package:practice_work/view/screen/song_detail_page.dart';
 import 'package:practice_work/view/screen/song_page.dart';
+import 'package:practice_work/view/screen/video_detail_page.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         routes: {
           "government_screen": (context) => SongPage(),
           "song_detail_page": (context) => SongDetailPage(),
+          "video_detail_page": (context) => VideoDetailPage(),
         });
   }
 }

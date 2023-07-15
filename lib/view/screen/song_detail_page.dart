@@ -22,6 +22,7 @@ class _SongDetailPageState extends State<SongDetailPage>
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<AudioProvider>(context).AudioImages.toList();
     return Consumer<AudioProvider>(
       builder: (context, provider, child) => SafeArea(
         child: Scaffold(
@@ -29,6 +30,8 @@ class _SongDetailPageState extends State<SongDetailPage>
             child: Column(
               children: [
                 Container(
+                  height: 200,
+                  width: 200,
                   child: Text("Audio Image"),
                   decoration: BoxDecoration(
                       gradient: LinearGradient(colors: [

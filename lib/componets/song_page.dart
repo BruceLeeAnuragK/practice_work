@@ -3,14 +3,14 @@ import 'package:provider/provider.dart';
 
 import '../Provider/AudioProvider.dart';
 
-class MediaPage extends StatefulWidget {
-  const MediaPage({super.key});
+class SongPlayer extends StatefulWidget {
+  const SongPlayer({super.key});
 
   @override
-  State<MediaPage> createState() => _MediaPageState();
+  State<SongPlayer> createState() => _SongPlayerState();
 }
 
-class _MediaPageState extends State<MediaPage> {
+class _SongPlayerState extends State<SongPlayer> {
   @override
   Widget build(BuildContext context) {
     return Consumer<AudioProvider>(
@@ -20,14 +20,29 @@ class _MediaPageState extends State<MediaPage> {
           if (snapShot.hasData) {
             double currentPosition = snapShot.data!.inSeconds.toDouble();
             return ListView.separated(
-                itemBuilder: (context, index) => ListTile(
-                      onTap: () {
-                        provider.changeIndex(index: index);
-                        Navigator.of(context).pushNamed("song_detail_page");
-                      },
-                      title: Text("Audio ${index + 1}"),
+                itemBuilder: (context, index) => Card(
+                      color: Colors.purple,
+                      child: ListTile(
+                        onTap: () {
+                          provider.changeIndex(index: index);
+                          Navigator.of(context).pushNamed("song_detail_page",
+                              arguments: provider.AudioImages[index]);
+                        },
+                        leading: CircleAvatar(
+                          foregroundImage: NetworkImage(
+                            provider.AudioImages[index],
+                          ),
+                        ),
+                        title: Text(
+                          provider.AudioName[index],
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
                     ),
-                separatorBuilder: (context, index) => Divider(),
+                separatorBuilder: (context, index) => Column(),
                 itemCount: provider.Audios.length);
           } else {
             return const Center(

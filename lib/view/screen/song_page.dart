@@ -6,6 +6,8 @@ import 'package:practice_work/Provider/VideoProvider.dart';
 import 'package:practice_work/componets/song_page.dart';
 import 'package:provider/provider.dart';
 
+import '../../componets/video_page.dart';
+
 class SongPage extends StatefulWidget {
   const SongPage({super.key});
 
@@ -30,62 +32,34 @@ class _SongPageState extends State<SongPage> with TickerProviderStateMixin {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: Colors.black,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.black,
           centerTitle: true,
-          bottom: TabBar(indicatorColor: Colors.purple, tabs: [
+          bottom: TabBar(indicatorColor: Colors.purple.shade100, tabs: [
             Icon(
               Icons.music_note_outlined,
-              color: Colors.purple,
+              color: Colors.purple.shade300,
               size: 30,
             ),
             Icon(
               Icons.video_collection,
-              color: Colors.purple,
+              color: Colors.purple.shade300,
               size: 30,
             ),
           ]),
-          title: const Text(
-            "Audio Player",
+          title: Text(
+            "Media Player",
             style: TextStyle(
-              fontSize: 40,
-              color: Colors.purple,
+              fontSize: 30,
+              color: Colors.purple.shade300,
             ),
           ),
         ),
         body: TabBarView(
           children: [
-            MediaPage(),
-            Consumer<VideoControllers>(
-              builder: (context, pro, child) => Center(
-                child: pro.videoPlayerController.value.isInitialized
-                    ? Column(
-                        children: [
-                          AspectRatio(
-                            aspectRatio:
-                                pro.videoPlayerController.value.aspectRatio,
-                            child: Chewie(
-                              controller: pro.chewieController,
-                            ),
-                          ),
-                          ListView.separated(
-                            itemBuilder: (context, index) => ListTile(
-                              onTap: () {
-                                pro.changeIndex(index: index);
-                              },
-                              leading: CircleAvatar(
-                                foregroundImage: pro.VideoImages[index],
-                              ),
-                              title: Text(pro.VideosName[index].toString()),
-                            ),
-                            separatorBuilder: (context, index) => Divider(),
-                            itemCount: pro.Videos.length,
-                          ),
-                        ],
-                      )
-                    : const CircularProgressIndicator(),
-              ),
-            )
+            SongPlayer(),
+            VideoPlayer(),
           ],
         ),
       ),

@@ -6,9 +6,9 @@ class VideoControllers extends ChangeNotifier {
   late VideoPlayerController videoPlayerController;
   late ChewieController chewieController;
   List VideoImages = [
-    "https://hdvideo9.com/siteuploads/thumb/sft20/9557_resize2x_320x180.webp",
-    "https://hdvideo9.com/siteuploads/thumb/sft20/9563_resize2x_320x180.webp",
-    "https://hdvideo9.com/siteuploads/thumb/sft19/9368_resize2x_320x180.webp",
+    "https://pagalworldl.com/uploads/thumb/sft10/4772_4.jpg",
+    "https://ghantalele.com/uploads/thumbs/cat/7387_2.jpg",
+    "https://thumb.pagalworld.gay/thumb/sft170/84903_4.jpg",
     "https://pagalworld.video/siteuploads/thumb/sft3/1360_resize_320x180.webp",
     "https://pagalworld.video/siteuploads/thumb/sft3/1337_resize_320x180.webp",
     "https://pagalworld.video/siteuploads/thumb/sft1/80_resize_320x180.webp",
@@ -46,17 +46,16 @@ class VideoControllers extends ChangeNotifier {
     "Teri_Deewani.mp4",
     "Aaj_Ke_Baad_Tu_Meri_Rehna.mp4",
     "Deewane_Hum_Nahi_Hote.mp4",
-    "videos/Manike_Mage_Hithe.mp4",
-    "videos/Kithe_Chaliye_Tu.mp4",
-    "videos/Calm_Down.mp4",
+    "Manike_Mage_Hithe.mp4",
+    "Kithe_Chaliye_Tu.mp4",
+    "Calm_Down.mp4",
   ];
   VideoControllers() {
-    init(index: 1);
+    init(index: 0);
   }
   init({required int index}) {
-    videoPlayerController = VideoPlayerController.asset(
-      "assets/videos/Aaj_Ke_Baad_Tu_Meri_Rehna.mp4",
-    )..initialize().then((value) {
+    videoPlayerController = VideoPlayerController.asset(Videos[index])
+      ..initialize().then((value) {
         chewieController = ChewieController(
           videoPlayerController: videoPlayerController,
           aspectRatio: videoPlayerController.value.aspectRatio,
@@ -69,6 +68,7 @@ class VideoControllers extends ChangeNotifier {
   changeIndex({required int index}) {
     videoPlayerController.pause();
     chewieController.pause();
+    notifyListeners();
     init(index: index);
   }
 
