@@ -47,6 +47,8 @@ dependencies:
   assets_audio_player:
   video_player:
   chewie:
+  http:
+  response:
 
 dev_dependencies:
   flutter_test:
