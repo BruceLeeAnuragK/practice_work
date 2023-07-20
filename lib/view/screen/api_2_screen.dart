@@ -3,32 +3,37 @@ import 'package:practice_work/helper/api_helper_class.dart';
 
 import '../../Model/post_model.dart';
 
-class APISingeScreen extends StatefulWidget {
-  const APISingeScreen({super.key});
+class APIMultipleScreen extends StatefulWidget {
+  const APIMultipleScreen({super.key});
 
   @override
-  State<APISingeScreen> createState() => _APISingeScreenState();
+  State<APIMultipleScreen> createState() => _APIMultipleScreenState();
 }
 
-class _APISingeScreenState extends State<APISingeScreen> {
+class _APIMultipleScreenState extends State<APIMultipleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.yellow,
         title: Text(
-          "Api Screen",
-          style: TextStyle(fontSize: 20, color: Colors.white),
+          "Api Multiple Screen",
+          style: TextStyle(fontSize: 20, color: Colors.brown),
         ),
       ),
       body: FutureBuilder(
-        future: APIhelper.apihelper.getSingleresponse(),
+        future: APIhelper.apihelper.getMultipleResponse(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            Posts posts = snapshot.data!;
-            return Card(
-              child: ListTile(
-                title: Text("${posts.title}"),
-                leading: Text("${posts.id}"),
+            List<Posts> posts = snapshot.data!;
+            return ListView.builder(
+              itemBuilder: (context, index) => Card(
+                child: ListTile(
+                  title: Text("${posts[index].title}"),
+                  leading: Text("${posts[index].id}"),
+                  trailing: Text("${posts[index].tags}"),
+                ),
               ),
             );
           } else if (snapshot.hasError) {
@@ -37,7 +42,9 @@ class _APISingeScreenState extends State<APISingeScreen> {
             );
           } else {
             return Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                color: Colors.yellow,
+              ),
             );
           }
         },

@@ -3,19 +3,21 @@ import 'package:practice_work/helper/api_helper_class.dart';
 
 import '../../Model/post_model.dart';
 
-class APISingeScreen extends StatefulWidget {
-  const APISingeScreen({super.key});
+class APISingleScreen extends StatefulWidget {
+  const APISingleScreen({super.key});
 
   @override
-  State<APISingeScreen> createState() => _APISingeScreenState();
+  State<APISingleScreen> createState() => _APISingleScreenState();
 }
 
-class _APISingeScreenState extends State<APISingeScreen> {
+class _APISingleScreenState extends State<APISingleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        centerTitle: true,
+        backgroundColor: Colors.green,
+        title: const Text(
           "Api Screen",
           style: TextStyle(fontSize: 20, color: Colors.white),
         ),
@@ -40,6 +42,18 @@ class _APISingeScreenState extends State<APISingeScreen> {
               child: CircularProgressIndicator(),
             );
           }
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.green,
+        child: Icon(
+          Icons.add,
+          size: 20,
+        ),
+        onPressed: () {
+          Navigator.of(context)
+              .pushNamed("api_multiple_screen")
+              .then((value) => setState(() {}));
         },
       ),
     );

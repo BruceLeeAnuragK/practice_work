@@ -19,5 +19,14 @@ class APIhelper {
     }
   }
 
-  Future<Posts?> getMultipleResponse() {}
+  Future<List<Posts>?> getMultipleResponse() async {
+    http.Response response = await http.get(Uri.parse(Api2));
+
+    if (response.statusCode == 200) {
+      List alldata = jsonDecode(response.body);
+      List<Posts> allPosts =
+          alldata.map((e) => Posts.fromMap(data: e)).toList();
+      return allPosts;
+    }
+  }
 }

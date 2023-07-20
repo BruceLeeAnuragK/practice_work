@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:practice_work/Provider/AudioProvider.dart';
 import 'package:practice_work/Provider/VideoProvider.dart';
 import 'package:practice_work/Provider/streamProvider.dart';
+import 'package:practice_work/view/screen/api_2_screen.dart';
+import 'package:practice_work/view/screen/api_screen.dart';
 import 'package:practice_work/view/screen/government_screen.dart';
 import 'package:practice_work/view/screen/song_detail_page.dart';
 import 'package:practice_work/view/screen/song_page.dart';
@@ -33,11 +35,13 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        initialRoute: "government_screen",
+        initialRoute: "api_single_screen",
         routes: {
           "government_screen": (context) => SongPage(),
           "song_detail_page": (context) => SongDetailPage(),
           "video_detail_page": (context) => VideoDetailPage(),
+          "api_single_screen": (context) => APISingleScreen(),
+          "api_multiple_screen": (context) => APIMultipleScreen(),
         });
   }
 }
