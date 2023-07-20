@@ -26,19 +26,19 @@ class _APIMultipleScreenState extends State<APIMultipleScreen> {
         future: APIhelper.apihelper.getMultipleResponse(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            List<Posts> posts = snapshot.data!;
+            List<Posts> posts = snapshot.data as List<Posts>;
             return ListView.builder(
+              itemCount: posts.length,
               itemBuilder: (context, index) => Card(
                 child: ListTile(
                   title: Text("${posts[index].title}"),
                   leading: Text("${posts[index].id}"),
-                  trailing: Text("${posts[index].tags}"),
                 ),
               ),
             );
           } else if (snapshot.hasError) {
             return Center(
-              child: Text("There is an Error"),
+              child: Text("There is an Error : ${snapshot.error}"),
             );
           } else {
             return Center(
