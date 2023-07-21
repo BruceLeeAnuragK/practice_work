@@ -8,6 +8,7 @@ import 'package:practice_work/view/screen/government_screen.dart';
 import 'package:practice_work/view/screen/song_detail_page.dart';
 import 'package:practice_work/view/screen/song_page.dart';
 import 'package:practice_work/view/screen/video_detail_page.dart';
+import 'package:practice_work/view/screen/wallpaper_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -35,13 +36,14 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        initialRoute: "api_single_screen",
+        initialRoute: "wallPaper_screen",
         routes: {
           "government_screen": (context) => SongPage(),
           "song_detail_page": (context) => SongDetailPage(),
           "video_detail_page": (context) => VideoDetailPage(),
           "api_single_screen": (context) => APISingleScreen(),
           "api_multiple_screen": (context) => APIMultipleScreen(),
+          "wallPaper_screen": (context) => WallPapers(),
         });
   }
 }

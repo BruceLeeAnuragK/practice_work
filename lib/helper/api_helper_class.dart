@@ -36,4 +36,16 @@ class APIhelper {
       return allPosts;
     }
   }
+
+  Future<List?> getWallpaperResponse({required String query}) async {
+    String WallpaperApi =
+        "https://pixabay.com/api/?key=37043026-230b0692a2c7c3b735944c114&q=$query";
+    http.Response response = await http.get(Uri.parse(WallpaperApi));
+
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      List allData = data["hits"];
+      return allData;
+    }
+  }
 }
