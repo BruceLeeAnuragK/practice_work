@@ -49,6 +49,7 @@ dependencies:
   chewie:
   http:
   response:
+  async_wallpaper:
 
 dev_dependencies:
   flutter_test:
