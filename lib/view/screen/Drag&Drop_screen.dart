@@ -13,7 +13,7 @@ class _DragScreenState extends State<DragScreen> {
     bool dropped = false;
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Simple Drag and Drop",
           style: TextStyle(color: Colors.white),
         ),
@@ -43,7 +43,7 @@ class _DragScreenState extends State<DragScreen> {
                 decoration: BoxDecoration(
                   color: Colors.blue,
                   border: Border.all(),
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       blurRadius: 10,
                       color: Colors.grey,
