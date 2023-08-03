@@ -3,6 +3,7 @@ import 'package:practice_work/Provider/APiProvider.dart';
 import 'package:practice_work/Provider/AudioProvider.dart';
 import 'package:practice_work/Provider/VideoProvider.dart';
 import 'package:practice_work/Provider/streamProvider.dart';
+import 'package:practice_work/view/screen/Drag&Drop_screen.dart';
 import 'package:practice_work/view/screen/api_2_screen.dart';
 import 'package:practice_work/view/screen/api_screen.dart';
 import 'package:practice_work/view/screen/government_screen.dart';
@@ -39,9 +40,9 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          useMaterial3: true,
         ),
-        initialRoute: "wallPaper_screen",
+        initialRoute: "drag_&_drop_screen",
         routes: {
           "government_screen": (context) => SongPage(),
           "song_detail_page": (context) => SongDetailPage(),
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
           "api_multiple_screen": (context) => APIMultipleScreen(),
           "wallPaper_screen": (context) => WallPapers(),
           "wallPaper_detail_screen": (context) => WallPaperDetailPage(),
+          "drag_&_drop_screen": (context) => DragScreen(),
         });
   }
 }
